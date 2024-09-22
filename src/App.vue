@@ -1,18 +1,13 @@
 <template>
-  <CabecalhoPrincipal />
   <div id="app">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import CabecalhoPrincipal from "@/components/CabecalhoPrincipal.vue";
-
 export default {
   name: "App",
-  components: {
-    CabecalhoPrincipal,
-  },
+  components: {},
 };
 </script>
 

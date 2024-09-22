@@ -3,18 +3,94 @@
     <div class="elementos_container">
       <img class="logo" src="../assets/logo.png" />
 
-      <div class="opc_navegacao">
-        <router-link to="/">Inicio</router-link>
-        <router-link to="/LojaPet">Loja Pet</router-link>
-        <router-link to="/NossosServicos">Nossos Serviços</router-link>
-      </div>
+      <ul class="opc_navegacao">
+        <li
+          :class="{ ativo: sessaoAtiva === 'inicio' }"
+          @click="scrollTo('inicio')"
+        >
+          Início
+        </li>
+        <li
+          :class="{ ativo: sessaoAtiva === 'quem-somos' }"
+          @click="scrollTo('quem-somos')"
+        >
+          Quem Somos?
+        </li>
+        <li
+          :class="{ ativo: sessaoAtiva === 'loja-pet' }"
+          @click="scrollTo('loja-pet')"
+        >
+          Loja Pet
+        </li>
+        <li
+          :class="{ ativo: sessaoAtiva === 'avaliacoes' }"
+          @click="scrollTo('avaliacoes')"
+        >
+          Avaliações
+        </li>
+        <li
+          :class="{ ativo: sessaoAtiva === 'venha-ser-pet-mania' }"
+          @click="scrollTo('venha-ser-pet-mania')"
+        >
+          Faça Parte
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data() {},
+  data() {
+    return {
+      sessaoAtiva: "inicio",
+    };
+  },
+
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
+  },
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
+  },
+  methods: {
+    scrollTo(id) {
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+        this.sessaoAtiva = id;
+      }
+    },
+    onScroll() {
+      const sections = [
+        { id: "inicio", offset: document.getElementById("inicio").offsetTop },
+        {
+          id: "quem-somos",
+          offset: document.getElementById("quem-somos").offsetTop,
+        },
+        {
+          id: "loja-pet",
+          offset: document.getElementById("loja-pet").offsetTop,
+        },
+        {
+          id: "avaliacoes",
+          offset: document.getElementById("avaliacoes").offsetTop,
+        },
+        {
+          id: "venha-ser-pet-mania",
+          offset: document.getElementById("venha-ser-pet-mania").offsetTop,
+        },
+      ];
+
+      const scrollPos = window.scrollY;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (scrollPos >= sections[i].offset - 50) {
+          this.sessaoAtiva = sections[i].id;
+          break;
+        }
+      }
+    },
+  },
 };
 </script>
 
@@ -31,19 +107,22 @@ export default {
   display: flex;
   flex-direction: row;
   height: 70px;
-  width: 60%;
+  width: 70%;
   column-gap: 200px;
-  margin: 0 20% 0 20%;
+  margin: 0 15% 0 19%;
   align-items: center;
 }
 .opc_navegacao {
   display: flex;
   flex-direction: row;
   column-gap: 50px;
+  color: #fff;
+  list-style: none;
+  cursor: pointer;
+}
 
-  a {
-    color: white;
-    text-decoration: none;
-  }
+.ativo {
+  color: #ff00a2;
+  font-weight: bolder;
 }
 </style>

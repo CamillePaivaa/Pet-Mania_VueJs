@@ -4,20 +4,25 @@
     <img class="gato" src="../assets/assetsAgendamento/gato.png" />
 
     <form class="formulario_container">
-      <h3>Seja Bem-Vindo!</h3>
-      <p>Cuidamos do seu bichinho com o maior carinho do mundo</p>
+      <div class="titulo_info">
+        <h3>Seja Bem-Vindo!</h3>
+        <p>Cuidamos do seu bichinho com o maior carinho do mundo</p>
+      </div>
+      <div class="label_inputs">
+        <!-- <label>Nome Completo</label>
+        <input type="text" /> -->
 
-      <label>Nome Completo</label>
-      <input type="text" />
+        <InputComponent />
 
-      <label>Data</label>
-      <input type="date" />
+        <label>Data</label>
+        <input type="date" />
 
-      <label>Hora</label>
-      <input type="time" />
+        <label>Hora</label>
+        <input type="time" />
 
-      <label>Selecione os Serviços Desejados</label>
-      <input type="checkbox" />
+        <label>Selecione os Serviços Desejados</label>
+        <input type="checkbox" />
+      </div>
     </form>
 
     <img class="pastas_laterais" src="../assets/assetsAgendamento/patas.png" />
@@ -25,8 +30,14 @@
 </template>
 
 <script>
+import InputComponent from "./InputComponent.vue";
+
 export default {
   name: "AgendamentoPet",
+
+  components: {
+    InputComponent,
+  },
 };
 </script>
 
@@ -34,7 +45,7 @@ export default {
 .page_container {
   display: flex;
   flex-direction: row;
-  padding-top: 90px;
+  padding-top: 50px;
   column-gap: 80px;
 }
 
@@ -54,11 +65,21 @@ export default {
   row-gap: 20px;
   background-color: rgba(255, 255, 255, 0.726);
   border-radius: 20px;
-  border: 3px solid pink;
   height: 600px;
+  width: 500px;
   padding-top: 30px;
 }
 
+.titulo_info {
+  text-align: center;
+}
+
+.label_inputs {
+  display: flex;
+  flex-direction: column;
+  padding: 5%;
+  row-gap: 10px;
+}
 .pastas_laterais {
   margin-top: 300px;
   width: 220px;
